@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.ai.search import semantic_search
+# from app.ai.search import semantic_search
 from app.schemas import SearchQuery
 
 from app.database import SessionLocal
@@ -162,19 +162,19 @@ def toggle_favorite(house_id: int):
     
 
 
-@app.post("/search")
-def search_houses(search: SearchQuery):
+# @app.post("/search")
+# def search_houses(search: SearchQuery):
 
-    db = SessionLocal()
+#     db = SessionLocal()
 
-    houses = db.query(House).all()
+#     houses = db.query(House).all()
 
-    results = semantic_search(
-        search.query,
-        houses
-    )
+#     results = semantic_search(
+#         search.query,
+#         houses
+#     )
 
-    return results
+#     return results
 
 @app.put("/houses/{house_id}")
 def update_house(house_id: int, house_data: HouseCreate):
