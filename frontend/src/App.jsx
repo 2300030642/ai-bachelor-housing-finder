@@ -1,5 +1,5 @@
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   Link
@@ -14,11 +14,11 @@ import "./index.css";
 function App() {
     const logout = () => {
   localStorage.removeItem("user");
-  window.location.href = "/login";
+  window.location.href = "/#/login";
 };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow p-3">
 
@@ -82,7 +82,7 @@ function App() {
 
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

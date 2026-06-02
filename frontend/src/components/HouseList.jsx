@@ -9,7 +9,7 @@ function HouseList() {
 );
 const isAdmin = user?.role === "admin";
 if (!user) {
-  window.location.href = "/login";
+  window.location.href = "/#/login";
   return null;
 }
 
