@@ -1,0 +1,75 @@
+body {
+  background: #f4f7fc;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-section {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+
+.house-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.house-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.house-image {
+  height: 220px;
+  object-fit: cover;
+}
+
+.favorite-btn {
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.contact-box {
+  background: #e8f4ff;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.filter-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.filter-title {
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #1f2937;
+}
+
+.filter-input {
+  height: 55px;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+}
+
+.filter-input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 0.2rem rgba(79,70,229,0.15);
+}
+
+.filter-checkbox {
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.filter-checkbox input {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
