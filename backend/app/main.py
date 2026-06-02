@@ -10,7 +10,10 @@ from app.models import House
 from app.schemas import HouseCreate
 from app.models import House, User, Favorite
 from fastapi import FastAPI, HTTPException
+from app.database import engine
+from app import models
 
+models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.add_middleware(
