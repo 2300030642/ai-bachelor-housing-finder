@@ -1,2 +1,2 @@
 export const API_URL =
-  "https://your-backend-url.onrender.com";
+  "https://ai-bachelor-housing-finder.onrender.com";
