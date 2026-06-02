@@ -7,32 +7,40 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const loginUser = async () => {
-    try {
+  try {
     const response = await axios.post(
-        `${API_URL}/login`,
-        {
-            email,
-            password,
-        }
+      `${API_URL}/login`,
+      {
+        email,
+        password,
+      }
     );
 
-    localStorage.setItem(
+    if (response.data.user_id) {
+
+      localStorage.setItem(
         "user",
         JSON.stringify(response.data)
-    );
+      );
 
-    alert("Login Successful");
+      alert("Login Successful");
 
-    window.location.href = "/#/";
+      window.location.href = "/#/";
 
-} catch (error) {
+    } else {
+
+      localStorage.removeItem("user");
+
+      alert("Invalid Email or Password");
+    }
+
+  } catch (error) {
 
     localStorage.removeItem("user");
 
-    alert("Invalid email or password");
-}
-  };
-
+    alert("Login Failed");
+  }
+};
   return (
   <div className="auth-container">
 

@@ -43,9 +43,7 @@ const [favorites, setFavorites] = useState([]);
 
 const fetchFavorites = async () => {
   try {
-    const response = await axios.get(
-      `${API_URL}/favorites/${user.user_id}`
-    );
+    const response = await axios.get(`${API_URL}/favorites/${user.user_id}`)
 
     console.log("Favorites:", response.data);
 
