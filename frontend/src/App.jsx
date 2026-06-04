@@ -8,59 +8,75 @@ import {
 import HouseList from "./components/HouseList";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
 import "./App.css";
 import "./index.css";
 
 function App() {
-    const logout = () => {
-  localStorage.removeItem("user");
-  window.location.href = "/#/login";
-};
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/#/";
+  };
 
   return (
     <HashRouter>
 
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow p-3">
 
-  <div className="container-fluid">
-
-    <Link
-      className="navbar-brand fw-bold fs-2"
-      to="/"
-    >
-      🏠 BachelorNest
-    </Link>
-
-    <div className="ms-auto">
-      {localStorage.getItem("user") ? (
-        <button
-          className="btn btn-danger px-4"
-          onClick={logout}
-        >
-          Logout
-        </button>
-      ) : (
-        <>
-          <Link
-            className="btn btn-light me-2"
-            to="/login"
-          >
-            Login
-          </Link>
+        <div className="container-fluid">
 
           <Link
-            className="btn btn-success"
-            to="/register"
+            className="navbar-brand fw-bold fs-2"
+            to="/"
           >
-            Register
+            🏠 BachelorNest
           </Link>
-        </>
-      )}
-    </div>
 
-  </div>
+          <div className="ms-auto">
 
-</nav>
+            {user ? (
+              <>
+                <span
+                  className="text-white me-3 fw-semibold"
+                >
+                  Welcome, {user.name}
+                </span>
+
+                <button
+                  className="btn btn-danger px-4"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="btn btn-light me-2"
+                  to="/login"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  className="btn btn-success"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </>
+            )}
+
+          </div>
+
+        </div>
+
+      </nav>
 
       <Routes>
 
@@ -78,7 +94,6 @@ function App() {
           path="/register"
           element={<Register />}
         />
-        
 
       </Routes>
 
