@@ -9,8 +9,11 @@ function HouseList() {
 );
 const isAdmin = user?.role === "admin";
 if (!user) {
-  window.location.href = "/#/login";
-  return null;
+  return (
+    <div className="container mt-5">
+      <h3>Please Login</h3>
+    </div>
+  );
 }
 
   const [houses, setHouses] = useState([]);
