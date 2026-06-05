@@ -56,30 +56,129 @@ const fetchFavorites = async () => {
   }
 };
   useEffect(() => {
+  fetchHouses();
 
-  const loadUser = () => {
+  if (user) {
+    fetchFavorites();
+  }
+}, []);
 
-    const storedUser = JSON.parse(
-      localStorage.getItem("user")
-    );
-
-    setUser(storedUser);
+  const fetchHouses = () => {
+    axios
+      .get(`${API_URL}/houses`)
+      .then((response) => {
+        setHouses(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  loadUser();
+  const addHouse = async () => {
+  try {
 
-  window.addEventListener(
-    "storage",
-    loadUser
-  );
+    const houseData = {
+      
+      title,
+      location,
+      price: Number(price),
+      wifi,
+      food,
+      ac,
+      rating: Number(rating),
+      description,
+      image_url: imageUrl,
+      favorite,
+      contact,
+    };
 
-  return () =>
-    window.removeEventListener(
-      "storage",
-      loadUser
+    if (editingId) {
+
+      await axios.put(
+        `${API_URL}/houses/${editingId}`,
+        houseData
+      );
+
+      alert("House Updated Successfully!");
+      setEditingId(null);
+
+    } else {
+
+      await axios.post(
+        `${API_URL}/houses`,
+        houseData
+      );
+
+      alert("House Added Successfully!");
+    }
+
+    setTitle("");
+    setLocation("");
+    setPrice("");
+    setWifi(false);
+    setFood(false);
+    setAc(false);
+    setRating("");
+    setDescription("");
+    setImageUrl("");
+    setFavorite(false);
+    setContact("");
+
+    fetchHouses();
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+  const deleteHouse = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/houses/${id}`);
+
+      alert("House Deleted!");
+
+      fetchHouses();
+    } catch (error) {
+      console.log(error);
+      alert("Failed to delete house");
+    }
+    
+  };
+  
+  
+
+
+const editHouse = (house) => {
+  setEditingId(house.id);
+
+  setTitle(house.title);
+  setLocation(house.location || "");
+  setPrice(house.price);
+  setWifi(house.wifi);
+  setFood(house.food);
+  setAc(house.ac);
+  setRating(house.rating || "");
+  setDescription(house.description || "");
+  setImageUrl(house.image_url || "");
+  setFavorite(house.favorite || false);
+  setContact(house.contact || "");
+  
+};
+
+
+const addFavorite = async (houseId) => {
+  try {
+    await axios.post(
+      `${API_URL}/favorite/${user.user_id}/${houseId}`
     );
 
-}, []);
+    await fetchFavorites();
+    fetchHouses();
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const isFavorite = (houseId) => {
   return favorites.some(
