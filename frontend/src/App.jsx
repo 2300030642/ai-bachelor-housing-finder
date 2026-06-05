@@ -185,14 +185,22 @@ function App() {
         />
 
         <Route
-          path="/login"
-          element={<Login />}
-        />
+  path="/login"
+  element={
+    user
+      ? <HouseList />
+      : <Login />
+  }
+/>
 
         <Route
-          path="/register"
-          element={<Register />}
-        />
+  path="/register"
+  element={
+    user
+      ? <HouseList />
+      : <Register />
+  }
+/>
 
       </Routes>
 
