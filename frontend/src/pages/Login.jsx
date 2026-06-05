@@ -25,8 +25,7 @@ function Login() {
 
       alert("Login Successful");
 
-      window.location.href = "/#/";
-window.location.reload();
+      window.location.replace("/#/");
 
     } else {
 
