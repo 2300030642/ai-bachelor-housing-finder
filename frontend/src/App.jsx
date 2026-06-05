@@ -19,12 +19,31 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+
+  const updateUser = () => {
+
     const storedUser = JSON.parse(
       localStorage.getItem("user")
     );
 
     setUser(storedUser);
-  }, []);
+  };
+
+  updateUser();
+
+  window.addEventListener(
+    "focus",
+    updateUser
+  );
+
+  return () => {
+    window.removeEventListener(
+      "focus",
+      updateUser
+    );
+  };
+
+}, []);
 
   const logout = () => {
 
@@ -32,7 +51,7 @@ function App() {
 
     setUser(null);
 
-    window.location.href = "/#/login";
+    window.location.replace("/#/login");
   };
 
   return (
@@ -53,10 +72,6 @@ function App() {
 
             {user ? (
               <>
-                <span className="text-white me-3 fw-semibold">
-                  Welcome, {user.name}
-                </span>
-
                 <button
                   className="btn btn-danger px-4"
                   onClick={logout}

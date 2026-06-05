@@ -10,8 +10,77 @@ function HouseList() {
 const isAdmin = user?.role === "admin";
 if (!user) {
   return (
-    <div className="container mt-5">
-      <h3>Please Login</h3>
+    <div className="container mt-4">
+
+      <div
+        className="text-center p-4 rounded shadow"
+        style={{
+          background: "white",
+          maxWidth: "900px",
+          margin: "auto",
+          border: "1px solid #e5e7eb"
+        }}
+      >
+
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/619/619153.png"
+          alt="House"
+          style={{
+            width: "180px",
+            opacity: "0.95"
+          }}
+        />
+
+        <h1
+          className="fw-bold mt-3"
+          style={{
+            color: "#1f2a44"
+          }}
+        >
+          🏠 AI Bachelor Housing Finder
+        </h1>
+
+        <p className="lead text-muted mt-3">
+          Find affordable PGs, hostels and rental rooms
+          near your college or workplace.
+        </p>
+
+        <div className="row mt-4">
+
+          <div className="col-md-4">
+            <div className="card border-0 shadow-sm p-3 h-100">
+              <h2>🔍</h2>
+              <h5>Smart Search</h5>
+              <small>
+                Search by location, budget and facilities.
+              </small>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card border-0 shadow-sm p-3 h-100">
+              <h2>❤️</h2>
+              <h5>Favorites</h5>
+              <small>
+                Save houses for future comparison.
+              </small>
+            </div>
+          </div>
+
+          <div className="col-md-4">
+            <div className="card border-0 shadow-sm p-3 h-100">
+              <h2>📞</h2>
+              <h5>Direct Contact</h5>
+              <small>
+                Contact owners without brokers.
+              </small>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
@@ -45,12 +114,16 @@ const [favorites, setFavorites] = useState([]);
 
 
 const fetchFavorites = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/favorites/${user.user_id}`)
 
-    console.log("Favorites:", response.data);
+  if (!user) return;
+
+  try {
+    const response = await axios.get(
+      `${API_URL}/favorites/${user.user_id}`
+    );
 
     setFavorites(response.data);
+
   } catch (error) {
     console.log(error);
   }
@@ -254,9 +327,11 @@ const filteredHouses = houses
   return (
     <div className="container mt-4">
       <div className="text-center mb-5 hero-section">
+  {user && (
   <h5 className="text-secondary">
     Welcome, {user.name}
   </h5>
+)}
 
   <h1>
     🏠 AI Bachelor Housing Finder

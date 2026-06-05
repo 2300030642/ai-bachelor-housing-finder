@@ -18,16 +18,17 @@ function Login() {
 
     if (response.data.user_id) {
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data)
-      );
+  localStorage.setItem(
+    "user",
+    JSON.stringify(response.data)
+  );
 
-      alert("Login Successful");
+  alert("Login Successful");
 
-      window.location.replace("/#/");
+  window.location.href = "/#/";
+  window.location.reload();
 
-    } else {
+} else {
 
       localStorage.removeItem("user");
 
